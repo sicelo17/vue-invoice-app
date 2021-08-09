@@ -12,8 +12,27 @@
 <script>
 import Navigation from "./components/Navigation.vue"
 export default {
+  data() {
+    return {
+      mobile: null,
+    }
+  },
   components: {
     Navigation
+  },
+  created() {
+    this.checkScreen()
+    window.addEventListener("resize", this.checkScreen)
+  },
+  methods: {
+    checkScreen() {
+      const windowWidth = window.innerWidth
+      if (windowWidth <= 750){
+        this.mobile = true
+        return
+      }
+      this.mobile = false
+    }
   }
 }
 </script>
