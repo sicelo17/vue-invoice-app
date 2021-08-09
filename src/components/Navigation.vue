@@ -37,7 +37,7 @@ header {
 
         img {
             width: auto;
-            height: 90px;
+            height: 30px;
         }
     }
 }
