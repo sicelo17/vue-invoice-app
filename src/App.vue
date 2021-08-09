@@ -66,6 +66,19 @@ export default {
   }
 }
 
+.mobile-message {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #141625;
+  color: #fff;
+
+  p {
+    margin-top: 16px;
+  }
+}
+
 button,
 .button {
   cursor: pointer;
