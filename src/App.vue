@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="!mobile" class="app flex flex-column">
-      <Navigation/>
+      <Navigation />
       <div class="app-content flex flex-column">
         <router-view />
       </div>
@@ -15,31 +15,31 @@
 </template>
 
 <script>
-import Navigation from "./components/Navigation.vue"
+import Navigation from "./components/Navigation.vue";
 export default {
   data() {
     return {
       mobile: null,
-    }
+    };
   },
   components: {
-    Navigation
+    Navigation,
   },
   created() {
-    this.checkScreen()
-    window.addEventListener("resize", this.checkScreen)
+    this.checkScreen();
+    window.addEventListener("resize", this.checkScreen);
   },
   methods: {
     checkScreen() {
-      const windowWidth = window.innerWidth
-      if (windowWidth <= 750){
-        this.mobile = true
-        return
+      const windowWidth = window.innerWidth;
+      if (windowWidth <= 750) {
+        this.mobile = true;
+        return;
       }
-      this.mobile = false
-    }
-  }
-}
+      this.mobile = false;
+    },
+  },
+};
 </script>
 
 <style lang="scss">
