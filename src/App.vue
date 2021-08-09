@@ -1,10 +1,15 @@
 <template>
   <div>
-    <div class="app flex flex-column">
+    <div v-if="!mobile" class="app flex flex-column">
       <Navigation/>
       <div class="app-content flex flex-column">
         <router-view />
       </div>
+    </div>
+
+    <div v-else class="mobile-message flex flex-column">
+      <h2>Sorry, this app is not supported on mobile devices</h2>
+      <p>To use this app, please use a computer or tablet</p>
     </div>
   </div>
 </template>
