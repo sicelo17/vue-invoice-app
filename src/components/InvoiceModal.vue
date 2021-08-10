@@ -188,6 +188,7 @@
 
 <script>
 import { mapMutations } from "vuex";
+import { uid } from "uid";
 export default {
   name: "InvoiceModal",
   data() {
@@ -225,9 +226,20 @@ export default {
   },
   methods: {
     ...mapMutations(["TOGGLE_INVOICE"]),
+
     closeInvoice() {
       this.TOGGLE_INVOICE();
     },
+
+    addNewInvoiceItem() {
+        this.invoiceItemList.push({
+            uid: uid(),
+            itemName: "",
+            qty: "",
+            price: 0,
+            total:0,
+        })
+    }
   },
   watch: {
     paymentTerms() {
@@ -235,10 +247,9 @@ export default {
       this.paymentDueDateUnix = futureDate.setDate(
         futureDate.getDate() + parseInt(this.paymentTerms)
       );
-      this.paymentDueDate = new Date(this.paymentDueDateUnix).toLocaleDateString(
-      "en-us",
-      this.dateOptions
-    );
+      this.paymentDueDate = new Date(
+        this.paymentDueDateUnix
+      ).toLocaleDateString("en-us", this.dateOptions);
     },
   },
 };
