@@ -233,13 +233,17 @@ export default {
 
     addNewInvoiceItem() {
         this.invoiceItemList.push({
-            uid: uid(),
+            id: uid(),
             itemName: "",
             qty: "",
             price: 0,
             total:0,
         })
-    }
+    },
+
+    deleteInvoiceItem(id) {
+      this.invoiceItemList = this.invoiceItemList.filter((item) => item.id !== id);
+    },
   },
   watch: {
     paymentTerms() {
