@@ -96,11 +96,21 @@
         <div class="payment flex">
           <div class="input flex flex-column">
             <label for="invoiceDate">Invoice Date</label>
-            <input disabled type="text" id="invoiceDate" v-model="invoiceDate" />
+            <input
+              disabled
+              type="text"
+              id="invoiceDate"
+              v-model="invoiceDate"
+            />
           </div>
           <div class="input flex flex-column">
             <label for="paymentDueDate">Payment Due</label>
-            <input disabled type="text" id="paymentDueDate" v-model="paymentDueDate" />
+            <input
+              disabled
+              type="text"
+              id="paymentDueDate"
+              v-model="paymentDueDate"
+            />
           </div>
         </div>
         <div class="input flex flex-column">
@@ -112,7 +122,12 @@
         </div>
         <div class="input flex flex-column">
           <label for="productDescription">Product Description</label>
-          <input required type="text" id="productDescription" v-model="productDescription" />
+          <input
+            required
+            type="text"
+            id="productDescription"
+            v-model="productDescription"
+          />
         </div>
         <div class="work-items">
           <h3>Item List</h3>
@@ -123,12 +138,24 @@
               <th class="price">Price</th>
               <th class="total">Total</th>
             </tr>
-            <tr class="table-items flex" v-for="(item, index) in invoiceItemList" :key="index">
-              <td class="item-name"><input type="text" v-model="item.itemName" /></td>
+            <tr
+              class="table-items flex"
+              v-for="(item, index) in invoiceItemList"
+              :key="index"
+            >
+              <td class="item-name">
+                <input type="text" v-model="item.itemName" />
+              </td>
               <td class="qty"><input type="text" v-model="item.qty" /></td>
               <td class="price"><input type="text" v-model="item.price" /></td>
-              <td class="total flex">${{ (item.total = item.qty * item.price) }}</td>
-              <img @click="deleteInvoiceItem(item.id)" src="@/assets/icon-delete.svg" alt="" />
+              <td class="total flex">
+                ${{ (item.total = item.qty * item.price) }}
+              </td>
+              <img
+                @click="deleteInvoiceItem(item.id)"
+                src="@/assets/icon-delete.svg"
+                alt=""
+              />
             </tr>
           </table>
 
@@ -139,14 +166,20 @@
         </div>
       </div>
 
-     <!-- Save/Exit -->
+      <!-- Save/Exit -->
       <div class="save flex">
         <div class="left">
-          <button type="button" @click="closeInvoice" class="red">Cancel</button>
+          <button type="button" @click="closeInvoice" class="red">
+            Cancel
+          </button>
         </div>
         <div class="right flex">
-          <button type="submit" @click="saveDraft" class="dark-purple">Save Draft</button>
-          <button type="submit" @click="publishInvoice" class="purple">Create Invoice</button>
+          <button type="submit" @click="saveDraft" class="dark-purple">
+            Save Draft
+          </button>
+          <button type="submit" @click="publishInvoice" class="purple">
+            Create Invoice
+          </button>
         </div>
       </div>
     </form>
@@ -154,11 +187,12 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex"
+import { mapMutations } from "vuex";
 export default {
   name: "InvoiceModal",
   data() {
     return {
+      dateOptions: { year: "numeric", month: "short", day: "numeric" },
       billerStreetAddress: null,
       billerCity: null,
       billerZipCode: null,
@@ -181,12 +215,20 @@ export default {
       invoiceTotal: 0,
     };
   },
+  created() {
+    //get current date for invoice date field
+    this.invoiceDateUnix = Date.now();
+    this.invoiceDate = new Date(this.invoiceDateUnix).toLocaleDateString(
+      "en-us",
+      this.dateOptions
+    );
+  },
   methods: {
     ...mapMutations(["TOGGLE_INVOICE"]),
-    closeInvoice(){
-        this.TOGGLE_INVOICE();
-    }
-  }
+    closeInvoice() {
+      this.TOGGLE_INVOICE();
+    },
+  },
 };
 </script>
 
@@ -211,7 +253,8 @@ export default {
     width: 100%;
     background-color: #141625;
     color: #fff;
-    box-shadow: 10px 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 10px 4px 6px -1px rgba(0, 0, 0, 0.2),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
     h1 {
       margin-bottom: 48px;
       color: #fff;
