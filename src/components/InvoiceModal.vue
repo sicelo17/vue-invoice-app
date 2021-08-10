@@ -187,6 +187,7 @@
 </template>
 
 <script>
+import db from "../firebase/firebaseInit";
 import { mapMutations } from "vuex";
 import { uid } from "uid";
 export default {
@@ -232,18 +233,48 @@ export default {
     },
 
     addNewInvoiceItem() {
-        this.invoiceItemList.push({
-            id: uid(),
-            itemName: "",
-            qty: "",
-            price: 0,
-            total:0,
-        })
+      this.invoiceItemList.push({
+        id: uid(),
+        itemName: "",
+        qty: "",
+        price: 0,
+        total: 0,
+      });
     },
 
     deleteInvoiceItem(id) {
-      this.invoiceItemList = this.invoiceItemList.filter((item) => item.id !== id);
+      this.invoiceItemList = this.invoiceItemList.filter(
+        (item) => item.id !== id
+      );
     },
+
+    calInvoiceTotal(){
+        this.invoiceTotal = 0;
+        this.invoiceItemList.forEach(item => {
+            this.invoiceTotal += item.total;
+        })
+    },
+
+    publishInvoice() {
+        this.invoicePending = true;
+    },
+
+    saveDraft () {
+        this.invoiceDraft = true;
+    },
+
+    async uploadInvoice(){
+        if(this.invoiceItemList.length <= 0){
+            alert('Please ensure you filled out work items');
+            return;
+        }
+
+        this.calInvoiceTotal();
+    },
+
+    submitForm () {
+        this.uploadInvoice();
+    }
   },
   watch: {
     paymentTerms() {
