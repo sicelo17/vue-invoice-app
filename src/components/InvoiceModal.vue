@@ -5,7 +5,7 @@
     class="invoice-wrap flex flex-column"
   >
     <form @submit.prevent="submitForm" class="invoice-content">
-      <Loading v-show="loading"/>
+      <Loading v-show="loading" />
       <h1>New Invoice</h1>
 
       <!-- Bill From -->
@@ -232,7 +232,13 @@ export default {
     );
   },
   methods: {
-    ...mapMutations(["TOGGLE_INVOICE"]),
+    ...mapMutations(["TOGGLE_INVOICE", "TOGGLE_MODAL"]),
+
+    checkClick(e){
+      if (e.target === this.$refs.invoiceWrap) {
+        this.TOGGLE_MODAL();
+      }
+    },
 
     closeInvoice() {
       this.TOGGLE_INVOICE();
@@ -305,7 +311,7 @@ export default {
         invoiceDraft: this.invoiceDraft,
         invoicePaid: null,
       });
-      
+
       this.loading = false;
 
       this.TOGGLE_INVOICE();
