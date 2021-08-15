@@ -197,7 +197,7 @@ export default {
   data() {
     return {
       dateOptions: { year: "numeric", month: "short", day: "numeric" },
-      Loading: null,
+      loading: null,
       billerStreetAddress: null,
       billerCity: null,
       billerZipCode: null,
