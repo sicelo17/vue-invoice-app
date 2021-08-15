@@ -218,7 +218,7 @@ export default {
     };
   },
   created() {
-    //get current date for invoice date field
+    // get current date for invoice date field
     this.invoiceDateUnix = Date.now();
     this.invoiceDate = new Date(this.invoiceDateUnix).toLocaleDateString(
       "en-us",
